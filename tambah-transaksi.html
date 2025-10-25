@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Transaksi - Sistem Kas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #27ae60, #219652);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .notification {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-plus-circle"></i> Tambah Transaksi</h1>
+            <p>Catat pemasukan dan pengeluaran Anda</p>
+        </header>
+        
+        <div class="navigation">
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="tambah-transaksi.html" class="nav-btn">
+                <i class="fas fa-plus"></i> Tambah Transaksi
+            </a>
+            <a href="riwayat.html" class="nav-btn">
+                <i class="fas fa-history"></i> Riwayat
+            </a>
+        </div>
+        
+        <div class="notification" id="notification">
+            Transaksi berhasil ditambahkan!
+        </div>
+        
+        <div class="form-section">
+            <form id="transaksi-form">
+                <div class="form-group">
+                    <label for="jenis"><i class="fas fa-exchange-alt"></i> Jenis Transaksi</label>
+                    <select id="jenis" required>
+                        <option value="">Pilih Jenis Transaksi</option>
+                        <option value="pemasukan">💰 Pemasukan</option>
+                        <option value="pengeluaran">💸 Pengeluaran</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jumlah"><i class="fas fa-money-bill-wave"></i> Jumlah (Rp)</label>
+                    <input type="number" id="jumlah" min="1" required placeholder="Masukkan jumlah">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kategori"><i class="fas fa-tags"></i> Kategori</label>
+                    <select id="kategori" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="gaji">Gaji</option>
+                        <option value="investasi">Investasi</option>
+                        <option value="hadiah">Hadiah</option>
+                        <option value="makanan">Makanan</option>
+                        <option value="transportasi">Transportasi</option>
+                        <option value="hiburan">Hiburan</option>
+                        <option value="kesehatan">Kesehatan</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="keterangan"><i class="fas fa-sticky-note"></i> Keterangan</label>
+                    <textarea id="keterangan" rows="3" required placeholder="Deskripsi transaksi"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tanggal"><i class="fas fa-calendar"></i> Tanggal</label>
+                    <input type="date" id="tanggal" required>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-save"></i> Simpan Transaksi
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Set tanggal default ke hari ini
+        document.getElementById('tanggal').valueAsDate = new Date();
+        
+        const form = document.getElementById('transaksi-form');
+        const notification = document.getElementById('notification');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const jenis = document.getElementById('jenis').value;
+            const jumlah = parseInt(document.getElementById('jumlah').value);
+            const kategori = document.getElementById('kategori').value;
+            const keterangan = document.getElementById('keterangan').value;
+            const tanggal = document.getElementById('tanggal').value;
+            
+            if (!jenis || !jumlah || !kategori || !keterangan || !tanggal) {
+                alert('Harap isi semua field!');
+                return;
+            }
+            
+            // Load existing transactions
+            let transaksi = JSON.parse(localStorage.getItem('transaksi')) || [];
+            
+            // Add new transaction
+            const transaksiBaru = {
+                id: Date.now(),
+                tanggal: new Date(tanggal).toISOString(),
+                jenis,
+                jumlah,
+                kategori,
+                keterangan
+            };
+            
+            transaksi.push(transaksiBaru);
+            localStorage.setItem('transaksi', JSON.stringify(transaksi));
+            
+            // Show success notification
+            notification.style.display = 'block';
+            notification.style.background = '#27ae60';
+            notification.textContent = '✅ Transaksi berhasil ditambahkan!';
+            
+            // Reset form
+            form.reset();
+            document.getElementById('tanggal').valueAsDate = new Date();
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
